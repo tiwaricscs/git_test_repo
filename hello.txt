@@ -1,10 +1,5 @@
 hello world
 first change
-
-<<<<<<< HEAD
 second change
-=======
-
-
 thierd change
->>>>>>> secondbranch
+secondbranch

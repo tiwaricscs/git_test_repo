@@ -1,4 +1,9 @@
 hello world
 first change
 second change
+<<<<<<< HEAD
 change from github remote repo
+=======
+thierd change
+
+>>>>>>> master

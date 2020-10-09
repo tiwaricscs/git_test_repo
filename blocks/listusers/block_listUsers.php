@@ -30,14 +30,20 @@ class block_listusers extends block_base {
 
  
         function get_content() {
-      
+       global $DB;
 
         if ($this->content !== NULL) {
             return $this->content;
         }
 
+        $out='';
+        $users=$DB->get_records('user');
+        foreach($users as $user){
+            if($user->id==1||$user->id==2)continue;
+            $out .= $user->firstname.' '.$user->lastname.'<br/>';
+        }
         $this->content = new stdClass;
-        $this->content->text='this is the text';
+        $this->content->text=$out;
         $this->content->footer = 'this is footer';
         return $this->content;
     }

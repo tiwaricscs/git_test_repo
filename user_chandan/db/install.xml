@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMLDB PATH="local/user_chandan/db" VERSION="2020091401" COMMENT="XMLDB file for Moodle local/crud" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+    <TABLES>
+        <TABLE NAME="local_sr_registration" COMMENT="This is the registration table">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Standard Moodle primary key." />
+                <FIELD NAME="name" SEQUENCE="false" TYPE="char" NOTNULL="true" COMMENT="Name of the User" />
+                <FIELD NAME="registration_number" SEQUENCE="false" LENGTH="10" TYPE="int" NOTNULL="true" COMMENT="Registration Number of the User" />
+                <FIELD NAME="email" SEQUENCE="false" TYPE="char" NOTNULL="true" COMMENT="Email address of the user" />
+                <FIELD NAME="gender" SEQUENCE="false" TYPE="char" NOTNULL="true" COMMENT="Gender of the user" />
+                <FIELD NAME="mobile" SEQUENCE="false" TYPE="char" NOTNULL="true" COMMENT="Mobile number of the user" />
+                <FIELD NAME="last_modified" SEQUENCE="false" TYPE="int" LENGTH="15" NOTNULL="true" COMMENT="Last modified time" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="email" UNIQUE="true" FIELDS="email" />
+                <INDEX NAME="registration_number" UNIQUE="true" FIELDS="registration_number" />
+            </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>
+

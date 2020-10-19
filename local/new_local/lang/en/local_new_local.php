@@ -41,7 +41,7 @@ $string['mobileerr'] = 'Mobile number is required';
 $string['namefill'] ='Please fill your name'; 
 $string['mobilefill'] = 'Fill your mobile number';
 $string['mobilelength'] = 'Mobile number must be greater than 10 digit';
-
+$string['keyfill'] = 'please fill the key';
 //Success message
 $string['updated'] = "Record Updated successfully";
 $string['deleted'] = 'Record deleted successfully';

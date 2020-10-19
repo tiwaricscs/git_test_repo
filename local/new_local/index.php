@@ -37,7 +37,11 @@ $PAGE->set_url('/local/new_local/index.php');
 $title = get_string('pluginname', 'local_new_local');
 $PAGE->set_heading($title);
 $PAGE->set_title($title);
-
+$searchkey = '';
+$mform = new search();
+if($fromform = $mform->get_data()){
+ $searchkey = $fromform->key;
+}
 //setting the page layout
 $PAGE->set_pagelayout('standard');
 
@@ -55,9 +59,12 @@ $output = $PAGE->get_renderer('local_new_local');
 $url_hit = $CFG->wwwroot . '/local/new_local/ajaxhandler.php';
 $PAGE->requires->js_call_amd('local_new_local/search', 'search_func');
 //echo html_writer::tag('input', '', ['class' => 'search_user', 'id' => $url_hit]);
+
+$mform->display();
 echo html_writer::tag('div', '', ['class' => 'show_data']);
 echo html_writer::start_div('previous_table', []);
-echo $output->local_crud_table();
+
+echo $output->local_crud_table($searchkey);
 echo html_writer::end_div();
 echo $OUTPUT->download_dataformat_selector(get_string('download', ',local_new_local'), 'download.php', 'dataformat');
 echo $OUTPUT->footer();

@@ -67,14 +67,23 @@ class local_new_local_renderer extends plugin_renderer_base
         echo $newoutput;
     }
    
-    public function local_crud_table()
+    public function local_crud_table($searchkey)
     {
+        
         global $CFG, $DB, $OUTPUT;
         $table = new html_table();
-        $totalrecords = $DB->get_records('local_new_local', []);
-        $countpage = count($totalrecords);
+        $countpage=1;
         $PAGE = optional_param('page', 0, PARAM_INT);
         $limit = get_string('limit', 'local_new_local');
+
+        if(!empty($searchkey)){
+            $query = "SELECT * FROM {local_new_local} WHERE name LIKE '%$searchkey%'";
+            $totalrecords = $DB->get_records_sql($query, [], $limit, $countpage);
+        }else{
+        $totalrecords = $DB->get_records('local_new_local', []);
+        }
+        $countpage = count($totalrecords);
+       
         $pageurl = new moodle_url($CFG->wwwroot . '/local/new_local/index.php');
         $showpage = $limit * $PAGE;
         $table->id = 'table_data';

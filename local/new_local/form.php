@@ -34,7 +34,6 @@ class registration extends moodleform{
  
         $mform = $this->_form;                                                           // Don't forget the underscore! 
 
-        $mform = $this->_form;
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);
         
@@ -79,5 +78,39 @@ class registration extends moodleform{
         }
 
         return isset($error) ? $error : null;
+    }
+}
+
+
+class search extends moodleform{
+
+    //Add elements to form
+    public function definition() {
+        global $CFG;
+ 
+        $mform = $this->_form;                                                           // Don't forget the underscore! 
+
+       
+        $mform->addElement('text', 'key', get_string('search', 'local_new_local'));
+        $mform->setType('key', PARAM_TEXT);                                             //Set type of element  
+        $mform->setDefault('key', '');                                                 //set the default value
+      
+        //adding the submit button
+        $this->add_action_buttons(false);
+    }
+   
+   
+    //Custom validation should be added here
+    function validation($data, $files) {
+
+        global $DB;
+        
+        $errorkey = trim($data['key']);
+        
+
+        if (empty($errorkey)) {
+            $error['key'] = get_string('keyfill', 'local_new_local');
+        }
+     return isset($error) ? $error : null;
     }
 }

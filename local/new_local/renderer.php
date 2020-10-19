@@ -74,9 +74,9 @@ class local_new_local_renderer extends plugin_renderer_base
         $totalrecords = $DB->get_records('local_new_local', []);
         $countpage = count($totalrecords);
         $PAGE = optional_param('page', 0, PARAM_INT);
-       // $limit = get_string('limit', 'local_new_local');
-        $pageurl = new moodle_url($CFG->wwwroot . '/local/user_new_local/index.php');
-       // $showpage = $limit * $PAGE;
+        $limit = get_string('limit', 'local_new_local');
+        $pageurl = new moodle_url($CFG->wwwroot . '/local/new_local/index.php');
+        $showpage = $limit * $PAGE;
         $table->id = 'table_data';
         $table->head = array(
             get_string('id', 'local_new_local'),
@@ -86,8 +86,8 @@ class local_new_local_renderer extends plugin_renderer_base
             get_string('edit', 'local_new_local'),
             get_string('delete', 'local_new_local')
         );
-        //$userdata = list_all_data($showpage, $limit);
-        $userdata = $DB-> get_records('local_new_local');
+        $userdata = list_all_data($showpage, $limit);
+       // $userdata = $DB-> get_records('local_new_local');
         $id = 1;
         foreach ($userdata as $user) {
             
@@ -104,7 +104,7 @@ class local_new_local_renderer extends plugin_renderer_base
             $id++;
         }
         $old = html_writer::table($table);
-       // $old .= $OUTPUT->paging_bar($countpage, $PAGE, $limit, $pageurl);
+        $old .= $OUTPUT->paging_bar($countpage, $PAGE, $limit, $pageurl);
         echo $old;
     }
 }

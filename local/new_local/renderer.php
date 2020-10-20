@@ -31,11 +31,11 @@ class local_new_local_renderer extends plugin_renderer_base
         $totalrecords = $DB->get_records('local_new_local', []);
         $countpage = count($totalrecords);
         $PAGE = optional_param('page', 0, PARAM_INT);
-       // $limit = get_string('limit', 'local_new_local');
+     
         $perpage = optional_param('perpage', 2, PARAM_INT);
 
         $pageurl = new moodle_url($CFG->wwwroot . '/local/new_local/index.php');
-       // $showpage = $limit * $PAGE;
+       
 
         $table->head = array(
             get_string('id', 'local_new_local'),
@@ -45,12 +45,11 @@ class local_new_local_renderer extends plugin_renderer_base
             get_string('edit', 'local_new_local'),
             get_string('delete', 'local_new_local')
         );
-       // $userdata = list_all_data_ajax($showpage, $limit, $search_key);
-       // $count_new_data = count($userdata);
+      
         $userdata = $DB-> get_records('local_new_local');
         $id = 1;
         foreach ($userdata as $user) {
-          //  $gender = '';
+          
             $url_update = new moodle_url($CFG->wwwroot . '/local/new_local/regis_form.php', array('id' => $user->id, 'action' => 'edit'));
             $url_delete = new moodle_url($CFG->wwwroot . '/local/new_local/regis_form.php', array('id' => $user->id, 'action' => 'delete'));
             $table->data[] = array(
@@ -64,9 +63,7 @@ class local_new_local_renderer extends plugin_renderer_base
             $id++;
         }
         $newoutput = html_writer::table($table);
-        // if ($count_new_data >= $limit - 1) {
-        //     $newoutput .= $OUTPUT->paging_bar($countpage, $PAGE, $limit, $pageurl);
-        // }
+        
         echo $newoutput;
     }
    
@@ -75,11 +72,10 @@ class local_new_local_renderer extends plugin_renderer_base
         
         global $CFG, $DB, $OUTPUT;
         $table = new html_table();
-       // $countpage=1;
+      
         $page = optional_param('page', 0, PARAM_INT);
         $perpage = optional_param('perpage', 4, PARAM_INT);
-        //$limit = 2;
-       // $showpage = $limit * $PAGE;
+       
 
         if(!empty($searchkey)){
 
@@ -102,10 +98,7 @@ class local_new_local_renderer extends plugin_renderer_base
 
             
         }else{
-            //$page = optional_param('page', 0, PARAM_INT);
-            // $limit = get_string('limit', 'local_new_local');
-            // $perpage = optional_param('perpage', 4, PARAM_INT);
-
+           
             $totalrecords = $DB->get_records('local_new_local');
             $countpage = count($totalrecords);
             $start = $page * $perpage;
@@ -117,22 +110,6 @@ class local_new_local_renderer extends plugin_renderer_base
             $userdata = $DB->get_records('local_new_local', [], '', '*', $start, $perpage);
            
         }
-
-  
-       // $countpage = count($totalrecords);     
-       
-
-
-      //  $table->id = 'table_data';
-        // $table->head = array(
-        //     get_string('id', 'local_new_local'),
-        //     get_string('name', 'local_new_local'),
-        //     get_string('mobile', 'local_new_local'),
-        //     get_string('last_modified', 'local_new_local'),
-        //     get_string('edit', 'local_new_local'),
-        //     get_string('delete', 'local_new_local')
-        // );
-      
   
         $id = 1;
         foreach ($userdata as $user) {

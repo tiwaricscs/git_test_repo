@@ -71,9 +71,9 @@ echo html_writer::start_div('previous_table', []);
 
 echo $output->local_crud_table($searchkey);
 echo html_writer::end_div();
-//echo $OUTPUT->download_dataformat_selector(get_string('download', ',local_new_local'), 'download.php', 'dataformat');
 
-echo $OUTPUT->download_dataformat_selector('download', 'download.php', 'myqueryparam', array('foo' => 'bar'));
+//showing download menu
+echo $OUTPUT->download_dataformat_selector(get_string('download', 'local_new_local'), 'download.php', 'dataformat');
 
 $url = new moodle_url($CFG->wwwroot . '/local/new_local/index.php');
 echo html_writer::link($url, get_string('index', 'local_new_local'));

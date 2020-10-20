@@ -64,7 +64,7 @@ else if ($fromform = $mform->get_data()) {
 else {
   if ($action_perform == 'delete') {
     $delete = $DB->delete_records('local_new_local', ['id' => $id_act]);
-    redirect($url, get_string('deleted', 'local_user_chandan'));
+    redirect($url, get_string('deleted', 'local_new_local'));
   } else {
     $toform =  $DB->get_record('local_new_local', array('id' => $id_act));;
     $mform->set_data($toform);

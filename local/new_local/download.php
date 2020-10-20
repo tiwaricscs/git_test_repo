@@ -38,4 +38,3 @@ $downloadusers = new ArrayObject($rs);
 $iterator = $downloadusers->getIterator();
 //\core\dataformat::download_data($file_name,$format,$columns,$iterator);
 download_as_dataformat($file_name, $format, $columns, $iterator);
-

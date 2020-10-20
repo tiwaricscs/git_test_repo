@@ -74,18 +74,34 @@ class local_new_local_renderer extends plugin_renderer_base
         $table = new html_table();
         $countpage=1;
         $PAGE = optional_param('page', 0, PARAM_INT);
-        $limit = get_string('limit', 'local_new_local');
+        $limit = 2;
+        $showpage = $limit * $PAGE;
 
         if(!empty($searchkey)){
+      
             $query = "SELECT * FROM {local_new_local} WHERE name LIKE '%$searchkey%'";
-            $totalrecords = $DB->get_records_sql($query, [], $limit, $countpage);
+            $totalrecords = $DB->get_records_sql($query);
+            $countpage = count($totalrecords);
+
+            if($countpage == 0 ){ 
+                \core\notification::warning('data not found'); 
+            };
+            $userdata = $DB->get_records_sql($query);
+
+            
         }else{
-        $totalrecords = $DB->get_records('local_new_local', []);
+           
+            $totalrecords = $DB->get_records('local_new_local');
+            $countpage = count($totalrecords);
+            $userdata = $DB->get_records('local_new_local', [], '', '*', $limit, $countpage);
+            
         }
-        $countpage = count($totalrecords);
-       
+
+  
+        $countpage = count($totalrecords);     
         $pageurl = new moodle_url($CFG->wwwroot . '/local/new_local/index.php');
-        $showpage = $limit * $PAGE;
+
+
         $table->id = 'table_data';
         $table->head = array(
             get_string('id', 'local_new_local'),
@@ -95,8 +111,8 @@ class local_new_local_renderer extends plugin_renderer_base
             get_string('edit', 'local_new_local'),
             get_string('delete', 'local_new_local')
         );
-        $userdata = list_all_data($showpage, $limit);
-       // $userdata = $DB-> get_records('local_new_local');
+      
+  
         $id = 1;
         foreach ($userdata as $user) {
             

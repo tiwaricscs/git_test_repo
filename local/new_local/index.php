@@ -37,15 +37,18 @@ $PAGE->set_url('/local/new_local/index.php');
 $title = get_string('pluginname', 'local_new_local');
 $PAGE->set_heading($title);
 $PAGE->set_title($title);
-$searchkey = '';
-$mform = new search();
 
-if($fromform = $mform->get_data()){
-echo $searchkey = $fromform->key;
-}
 //setting the page layout
 $PAGE->set_pagelayout('standard');
 
+//search form initialization
+$searchkey = '';
+$mform = new search();
+if($fromform = $mform->get_data()){
+$searchkey = $fromform->key;
+}
+
+//url for the regis_form.php page
 $url = $CFG->wwwroot . '/local/new_local/regis_form.php';
 
 //browser output start here

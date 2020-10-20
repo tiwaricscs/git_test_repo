@@ -103,7 +103,7 @@ class search extends moodleform{
     //Custom validation should be added here
     function validation($data, $files) {
 
-        global $DB;
+        
         
         $errorkey = trim($data['key']);
         

@@ -22,18 +22,18 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  */
 
-defined('MOODLE_INTERNAL') || die();
-function list_all_data($limit, $countpage)
-{
-    global $DB;
-    $list = $DB->get_records('local_new_local', [], '', '*', $limit, $countpage);
-    return $list;
-}
-function list_all_data_ajax($limit, $countpage, $search_key)
-{
-    global $DB;
-    $query = "SELECT * FROM {local_new_local} WHERE name LIKE '%$search_key%'";
-    $list = $DB->get_records_sql($query, [], $limit, $countpage);
-    return $list;
-}
+// defined('MOODLE_INTERNAL') || die();
+// function list_all_data($limit, $countpage)
+// {
+//     global $DB;
+//     $list = $DB->get_records('local_new_local', [], '', '*', $limit, $countpage);
+//     return $list;
+// }
+// function list_all_data_ajax($limit, $countpage, $search_key)
+// {
+//     global $DB;
+//     $query = "SELECT * FROM {local_new_local} WHERE name LIKE '%$search_key%'";
+//     $list = $DB->get_records_sql($query, [], $limit, $countpage);
+//     return $list;
+// }
 

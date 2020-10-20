@@ -45,7 +45,7 @@ $PAGE->set_pagelayout('standard');
 $searchkey =  optional_param('searchkey', null, PARAM_TEXT);
 $mform = new search();
 if($fromform = $mform->get_data()){
-$searchkey = $fromform->key;
+$searchkey = htmlspecialchars($fromform->key);
 }
 
 //url for the regis_form.php page
@@ -78,4 +78,3 @@ echo $OUTPUT->download_dataformat_selector('download', 'download.php', 'myqueryp
 $url = new moodle_url($CFG->wwwroot . '/local/new_local/index.php');
 echo html_writer::link($url, get_string('index', 'local_new_local'));
 echo $OUTPUT->footer();
-

@@ -35,7 +35,7 @@ class local_new_local_renderer extends plugin_renderer_base
         $perpage = optional_param('perpage', 2, PARAM_INT);
 
         $pageurl = new moodle_url($CFG->wwwroot . '/local/new_local/index.php');
-        $showpage = $limit * $PAGE;
+       // $showpage = $limit * $PAGE;
 
         $table->head = array(
             get_string('id', 'local_new_local'),
@@ -83,7 +83,7 @@ class local_new_local_renderer extends plugin_renderer_base
 
         if(!empty($searchkey)){
 
-
+            
             $query = "SELECT * FROM {local_new_local} WHERE name LIKE '%$searchkey%'";
             $totalrecords = $DB->get_records_sql($query);
             $countpage = count($totalrecords);
@@ -97,14 +97,14 @@ class local_new_local_renderer extends plugin_renderer_base
 
                 //showing notification
                 \core\notification::warning(get_string('dnf', 'local_new_local')); 
-            };
+            }
             $userdata = $DB->get_records_sql($query, [], $start, $perpage);
 
             
         }else{
-            $page = optional_param('page', 0, PARAM_INT);
+            //$page = optional_param('page', 0, PARAM_INT);
             // $limit = get_string('limit', 'local_new_local');
-             $perpage = optional_param('perpage', 4, PARAM_INT);
+            // $perpage = optional_param('perpage', 4, PARAM_INT);
 
             $totalrecords = $DB->get_records('local_new_local');
             $countpage = count($totalrecords);
@@ -119,19 +119,19 @@ class local_new_local_renderer extends plugin_renderer_base
         }
 
   
-        $countpage = count($totalrecords);     
+       // $countpage = count($totalrecords);     
        
 
 
-        $table->id = 'table_data';
-        $table->head = array(
-            get_string('id', 'local_new_local'),
-            get_string('name', 'local_new_local'),
-            get_string('mobile', 'local_new_local'),
-            get_string('last_modified', 'local_new_local'),
-            get_string('edit', 'local_new_local'),
-            get_string('delete', 'local_new_local')
-        );
+      //  $table->id = 'table_data';
+        // $table->head = array(
+        //     get_string('id', 'local_new_local'),
+        //     get_string('name', 'local_new_local'),
+        //     get_string('mobile', 'local_new_local'),
+        //     get_string('last_modified', 'local_new_local'),
+        //     get_string('edit', 'local_new_local'),
+        //     get_string('delete', 'local_new_local')
+        // );
       
   
         $id = 1;

@@ -105,7 +105,7 @@ class search extends moodleform{
 
         
         
-        $errorkey = trim($data['key']);
+        $errorkey = trim(htmlspecialchars($data['key']));
         
 
         if (empty($errorkey)) {

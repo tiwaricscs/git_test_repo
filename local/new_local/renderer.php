@@ -30,10 +30,13 @@ class local_new_local_renderer extends plugin_renderer_base
         $table = new html_table();
         $totalrecords = $DB->get_records('local_new_local', []);
         $countpage = count($totalrecords);
-      //  $PAGE = optional_param('page', 0, PARAM_INT);
-      //  $limit = get_string('limit', 'local_new_local');
+        $PAGE = optional_param('page', 0, PARAM_INT);
+       // $limit = get_string('limit', 'local_new_local');
+        $perpage = optional_param('perpage', 2, PARAM_INT);
+
         $pageurl = new moodle_url($CFG->wwwroot . '/local/new_local/index.php');
-        //$showpage = $limit * $PAGE;
+        $showpage = $limit * $PAGE;
+
         $table->head = array(
             get_string('id', 'local_new_local'),
             get_string('name', 'local_new_local'),
@@ -72,34 +75,52 @@ class local_new_local_renderer extends plugin_renderer_base
         
         global $CFG, $DB, $OUTPUT;
         $table = new html_table();
-        $countpage=1;
-        $PAGE = optional_param('page', 0, PARAM_INT);
-        $limit = 2;
-        $showpage = $limit * $PAGE;
+       // $countpage=1;
+        $page = optional_param('page', 0, PARAM_INT);
+        $perpage = optional_param('perpage', 4, PARAM_INT);
+        //$limit = 2;
+       // $showpage = $limit * $PAGE;
 
         if(!empty($searchkey)){
-      
+
+
             $query = "SELECT * FROM {local_new_local} WHERE name LIKE '%$searchkey%'";
             $totalrecords = $DB->get_records_sql($query);
             $countpage = count($totalrecords);
+            $start = $page * $perpage;
+             if ($start > $countpage) {
+             $page = 0;
+              $start = 0;
+              }
 
             if($countpage == 0 ){ 
-                \core\notification::warning('data not found'); 
+
+                //showing notification
+                \core\notification::warning(get_string('dnf', 'local_new_local')); 
             };
-            $userdata = $DB->get_records_sql($query);
+            $userdata = $DB->get_records_sql($query, [], $start, $perpage);
 
             
         }else{
-           
+            $page = optional_param('page', 0, PARAM_INT);
+            // $limit = get_string('limit', 'local_new_local');
+             $perpage = optional_param('perpage', 4, PARAM_INT);
+
             $totalrecords = $DB->get_records('local_new_local');
             $countpage = count($totalrecords);
-            $userdata = $DB->get_records('local_new_local', [], '', '*', $limit, $countpage);
-            
+            $start = $page * $perpage;
+            if ($start > $countpage) {
+             $page = 0;
+              $start = 0;
+              }
+
+            $userdata = $DB->get_records('local_new_local', [], '', '*', $start, $perpage);
+           
         }
 
   
         $countpage = count($totalrecords);     
-        $pageurl = new moodle_url($CFG->wwwroot . '/local/new_local/index.php');
+       
 
 
         $table->id = 'table_data';
@@ -129,7 +150,12 @@ class local_new_local_renderer extends plugin_renderer_base
             $id++;
         }
         $old = html_writer::table($table);
-        $old .= $OUTPUT->paging_bar($countpage, $PAGE, $limit, $pageurl);
+        if(!empty($searchkey)){
+            $pageurl = new moodle_url($CFG->wwwroot . '/local/new_local/index.php',['searchkey'=>$searchkey]);
+        }else{
+            $pageurl = new moodle_url($CFG->wwwroot . '/local/new_local/index.php');
+        }
+        $old .= $OUTPUT->paging_bar($countpage, $page, $perpage, $pageurl);
         echo $old;
     }
 }

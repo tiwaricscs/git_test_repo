@@ -34,6 +34,8 @@ $string['edit'] ="Update";
 $string['delete'] ="Delete";
 $string['download'] = 'Download';
 $string['search'] = 'Search';
+$string['dnf'] = "Data Not Found!!!!";
+$string['index'] = "go to index";
 
 //Error
 $string['nameerr'] = 'Name  is required';

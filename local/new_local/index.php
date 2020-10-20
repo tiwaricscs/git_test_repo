@@ -42,7 +42,7 @@ $PAGE->set_title($title);
 $PAGE->set_pagelayout('standard');
 
 //search form initialization
-$searchkey = '';
+$searchkey =  optional_param('searchkey', null, PARAM_TEXT);
 $mform = new search();
 if($fromform = $mform->get_data()){
 $searchkey = $fromform->key;
@@ -54,10 +54,6 @@ $url = $CFG->wwwroot . '/local/new_local/regis_form.php';
 //browser output start here
 echo $OUTPUT->header();
 
-//register link on the page
-echo html_writer::link($url, get_string('register_link', 'local_new_local'));
-echo "  ";
-
 //getting the instance of the plugin_renderer_base class
 $output = $PAGE->get_renderer('local_new_local');
 $url_hit = $CFG->wwwroot . '/local/new_local/ajaxhandler.php';
@@ -65,11 +61,21 @@ $PAGE->requires->js_call_amd('local_new_local/search', 'search_func');
 //echo html_writer::tag('input', '', ['class' => 'search_user', 'id' => $url_hit]);
 
 $mform->display();
+
+//register link on the page
+echo html_writer::link($url, get_string('register_link', 'local_new_local'));
+echo "  ";
+
 echo html_writer::tag('div', '', ['class' => 'show_data']);
 echo html_writer::start_div('previous_table', []);
 
 echo $output->local_crud_table($searchkey);
 echo html_writer::end_div();
 //echo $OUTPUT->download_dataformat_selector(get_string('download', ',local_new_local'), 'download.php', 'dataformat');
+
+echo $OUTPUT->download_dataformat_selector('download', 'download.php', 'myqueryparam', array('foo' => 'bar'));
+
+$url = new moodle_url($CFG->wwwroot . '/local/new_local/index.php');
+echo html_writer::link($url, get_string('index', 'local_new_local'));
 echo $OUTPUT->footer();
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMLDB PATH="local/new_local/db" VERSION="2020091401" COMMENT="XMLDB file for Moodle local/crud" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+    <TABLES>
+        <TABLE NAME="local_new_local" COMMENT="This is registration table">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Standard Moodle primary key." />
+                <FIELD NAME="name" SEQUENCE="false" TYPE="char" NOTNULL="true" COMMENT="Name of the User" />
+                <FIELD NAME="mobile" SEQUENCE="false" TYPE="char" NOTNULL="true" COMMENT="Mobile number of the user" />
+                <FIELD NAME="last_modified" SEQUENCE="false" TYPE="int" LENGTH="15" NOTNULL="true" COMMENT="Last modified time" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+            <INDEXES>
+                
+                <INDEX NAME="id" UNIQUE="true" FIELDS="id" />
+            </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>
